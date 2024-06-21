@@ -1,22 +1,20 @@
 package org.ayato.objects;
 
 import org.ayato.animation.image.ImageMaker;
-import org.ayato.component.ToonObject;
 import org.ayato.component.Transform;
+import org.ayato.util.BaseScene;
 import org.ayato.util.KeyInputs;
-import org.ayato.util.MouseInputs;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 
-public class Player extends ToonObject {
+public non-sealed class Player extends BaseShooter {
     private final String name;
-    private final ImageMaker image = new ImageMaker("objects","player");
-    public Player(Transform transform, String name) {
-        super(transform);
+    private final ImageMaker image = new ImageMaker("objects", "player");
+    public Player(Transform transform, String name, BaseScene scene) {
+        super(transform, scene);
         this.name = name;
+
     }
 
     @Override
@@ -24,13 +22,19 @@ public class Player extends ToonObject {
         graphics2D.drawImage(image.get(), i, i1, null);
     }
 
-    @Override
-    protected void tick(Transform transform) {
-        move(transform);
-    }
-    private void move(Transform transform){
-        if(KeyInputs.get(KeyEvent.VK_LEFT))
+    protected void move(Transform transform) {
+        if (KeyInputs.get(KeyEvent.VK_LEFT))
             transform.position.setX(transform.position.getNormalX() - 1);
+        if (KeyInputs.get(KeyEvent.VK_RIGHT))
+            transform.position.setX(transform.position.getNormalX() + 1);
+        if (KeyInputs.get(KeyEvent.VK_UP))
+            transform.position.setY(transform.position.getNormalY() - 1);
+        if (KeyInputs.get(KeyEvent.VK_DOWN))
+            transform.position.setY(transform.position.getNormalY() + 1);
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
-
 }

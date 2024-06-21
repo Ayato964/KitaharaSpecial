@@ -11,7 +11,6 @@ public class Title extends BaseScene {
 
     @Override
     public void tick() {
-
     }
 
     @Override

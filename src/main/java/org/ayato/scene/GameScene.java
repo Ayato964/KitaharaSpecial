@@ -15,8 +15,9 @@ public class GameScene extends BaseScene {
                 new Position(100, 100),
                 new Scale(100, 100),
                 new Rotate(0)
-        ), name);
+        ), name, this);
     }
+
     @Override
     protected void setToonObjects(CopyOnWriteArrayList<ToonObject> to) {
         to.add(player);
