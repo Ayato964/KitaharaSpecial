@@ -28,7 +28,7 @@ public class Title extends BaseScene {
         }, 80, 20, PropertyBase.TEMPLATE.of(40, 10).center());
         toonMaster.addAnimation("Start", PropertyBase.TEMPLATE.of(20, 120)
                 .button(0, 0, 50, 10, PropertyBase.STATE.get(),
-                        ac->toonMaster.changeScene(new GameScene())));
+                        ac->toonMaster.changeScene(new GameScene(name))));
 
     }
 }
