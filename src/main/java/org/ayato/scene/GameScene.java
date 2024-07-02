@@ -73,7 +73,7 @@ public class GameScene extends BaseScene {
     public void setupUIClass(ArrayList<Setup> setups) {
         setups.add(new PlayerStates(player, new Transform(
                 new Position(400, 10),
-                new Scale(90,40),
+                new Scale(90,90),
                 new Rotate(0)
         )));
     }

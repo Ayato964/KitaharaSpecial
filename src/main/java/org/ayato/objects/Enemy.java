@@ -1,5 +1,6 @@
 package org.ayato.objects;
 
+import org.ayato.component.ToonObject;
 import org.ayato.component.Transform;
 import org.ayato.system.ToonMaster;
 import org.ayato.util.BaseScene;
@@ -7,6 +8,9 @@ import org.ayato.util.BaseScene;
 import java.awt.*;
 
 public non-sealed class Enemy extends BaseShooter{
+    int bodyATK = 1;
+    int bodyWaitingTimeMax = 200;
+    int bodyWaitingTime = bodyWaitingTimeMax;
     public Enemy(Transform transform, BaseScene scene, int hp) {
         super(transform, scene, hp);
     }
@@ -14,6 +18,21 @@ public non-sealed class Enemy extends BaseShooter{
     @Override
     protected void move(Transform transform) {
         transform.position.setY(transform.position.getNormalY() + 0.1f);
+    }
+
+    @Override
+    protected void tick(Transform transform) {
+        super.tick(transform);
+        for(ToonObject o : ToonMaster.getINSTANCE().MY_SCENE.getObjects())
+            if(o instanceof Player p) {
+                if (transform.isCollision(p.transform)) {
+                    if(bodyWaitingTime >= bodyWaitingTimeMax) {
+                        p.damaged(bodyATK);
+                        bodyWaitingTime = 0;
+                    }
+                    bodyWaitingTime ++;
+                }
+            }
     }
 
     @Override

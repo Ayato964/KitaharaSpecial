@@ -30,6 +30,14 @@ public class PlayerStates implements Setup, Display {
                 .parent(trans.position));
         toonMaster.addAnimation((Supplier<String>) ()->"Have guns value:" + player.guns.size(), PropertyBase.TEMPLATE.of(10, 30)
                 .parent(trans.position));
+        toonMaster.addAnimation("HP / Max HP", PropertyBase.TEMPLATE.of(10, 40)
+                .parent(trans.position));
+        toonMaster.addAnimation((Supplier<String>) ()->player.getHp() +"/" + player.getMhp(),
+                PropertyBase.TEMPLATE.of(25, 50)
+                        .color(Color.BLACK)
+                .parent(trans.position));
+
+
     }
 
     @Override
@@ -39,6 +47,12 @@ public class PlayerStates implements Setup, Display {
         graphics.fillRect(vec.x(), vec.y(), trans.getW(), trans.getH());
         graphics.setColor(new Color(255,255,255));
         graphics.drawRect(vec.x(), vec.y(), trans.getW(), trans.getH());
+
+        graphics.setColor(Color.RED);
+        graphics.fillRect(vec.x() + 10, vec.y() + 210, trans.getW() - 20, 20);
+        graphics.setColor(Color.GREEN);
+        graphics.fillRect(vec.x() + 10, vec.y() + 210,
+                (int) ((trans.getW() - 20) * ((float)(player.getHp()) / (float) player.getMhp())), 20);
     }
 
     @Override
