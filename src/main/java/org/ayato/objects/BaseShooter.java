@@ -3,7 +3,6 @@ package org.ayato.objects;
 import org.ayato.component.ToonObject;
 import org.ayato.component.Transform;
 import org.ayato.guns.Gun;
-import org.ayato.guns.NormalGuns;
 import org.ayato.system.ToonMaster;
 import org.ayato.util.BaseScene;
 import org.ayato.util.KeyInputs;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 public abstract sealed class BaseShooter extends ToonObject permits Enemy, Player {
     public final ArrayList<Gun> guns = new ArrayList<>();
     public int haveGunNumber = 0;
-    private final BaseScene scene;
+    protected final BaseScene scene;
     protected int hp, mhp;
     private final Transform pos;
 
@@ -55,8 +54,17 @@ public abstract sealed class BaseShooter extends ToonObject permits Enemy, Playe
     }
     public void damaged(int atk) {
         hp -= atk;
-        if(hp <= 0)
+        if(hp <= 0) {
             ToonMaster.getINSTANCE().MY_SCENE.deleteObject(this);
+            death();
+        }
+
+    }
+    public void addHP(int h){
+        hp += h;
+        if(hp >= mhp)
+            hp = mhp;
     }
     protected abstract void move(Transform transform);
+    protected abstract void death();
 }

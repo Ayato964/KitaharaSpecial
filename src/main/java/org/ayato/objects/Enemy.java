@@ -2,6 +2,7 @@ package org.ayato.objects;
 
 import org.ayato.component.ToonObject;
 import org.ayato.component.Transform;
+import org.ayato.scene.GameScene;
 import org.ayato.system.ToonMaster;
 import org.ayato.util.BaseScene;
 
@@ -11,13 +12,22 @@ public non-sealed class Enemy extends BaseShooter{
     int bodyATK = 1;
     int bodyWaitingTimeMax = 200;
     int bodyWaitingTime = bodyWaitingTimeMax;
+    int haveEXP;
     public Enemy(Transform transform, BaseScene scene, int hp) {
         super(transform, scene, hp);
+        haveEXP = hp / 2;
     }
 
     @Override
     protected void move(Transform transform) {
         transform.position.setY(transform.position.getNormalY() + 0.1f);
+    }
+
+    @Override
+    protected void death() {
+        if(scene instanceof GameScene s){
+            s.player.addEXP(haveEXP);
+        }
     }
 
     @Override

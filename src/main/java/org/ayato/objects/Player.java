@@ -1,10 +1,13 @@
 package org.ayato.objects;
 
+import org.ayato.animation.PropertiesComponent;
 import org.ayato.animation.image.ImageMaker;
 import org.ayato.component.Transform;
 import org.ayato.guns.NormalGuns;
+import org.ayato.system.ToonMaster;
 import org.ayato.util.BaseScene;
 import org.ayato.util.KeyInputs;
+import org.ayato.utils.PropertyBase;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -12,6 +15,7 @@ import java.awt.event.KeyEvent;
 public final class Player extends BaseShooter {
     public final String name;
     public int level = 1;
+    public int EXP = 0, MAX_EXP = 2;
     private final ImageMaker image = new ImageMaker("objects", "player");
 
     public Player(Transform transform, String name, BaseScene scene) {
@@ -40,5 +44,27 @@ public final class Player extends BaseShooter {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    protected void death() {
+        ToonMaster.getINSTANCE().addAnimation("GAME OVER", PropertiesComponent.ofText(50, 40)
+                .color(Color.WHITE)
+                .font("", 0, 5)
+                .fadeIn(200));
+    }
+
+    public void addEXP(int exp) {
+        EXP += exp;
+        if(EXP >= MAX_EXP) {
+            levelUp();
+            addEXP(0);
+        }
+    }
+    public void levelUp(){
+        level++;
+        EXP -= MAX_EXP;
+        MAX_EXP *= 1.5;
+        addHP(mhp / 3);
     }
 }

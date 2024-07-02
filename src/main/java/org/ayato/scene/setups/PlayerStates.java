@@ -37,6 +37,8 @@ public class PlayerStates implements Setup, Display {
                         .color(Color.BLACK)
                 .parent(trans.position));
 
+        toonMaster.addAnimation("EXP:", PropertyBase.TEMPLATE.of(10, 60)
+                .parent(trans.position));
 
     }
 
@@ -53,6 +55,15 @@ public class PlayerStates implements Setup, Display {
         graphics.setColor(Color.GREEN);
         graphics.fillRect(vec.x() + 10, vec.y() + 210,
                 (int) ((trans.getW() - 20) * ((float)(player.getHp()) / (float) player.getMhp())), 20);
+
+        graphics.setColor(Color.WHITE);
+        graphics.drawRect(vec.x() + 10, vec.y() + 280, trans.getW() - 20, 20);
+        graphics.setColor(Color.ORANGE);
+        graphics.fillRect(vec.x() + 10, vec.y() + 280,
+                (int) ((trans.getW() - 20) * ((float)(player.EXP) / (float) player.MAX_EXP)),
+                20);
+
+
     }
 
     @Override

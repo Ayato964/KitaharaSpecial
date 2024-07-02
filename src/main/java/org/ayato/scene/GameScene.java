@@ -3,6 +3,7 @@ package org.ayato.scene;
 import org.ayato.component.*;
 import org.ayato.objects.Enemy;
 import org.ayato.objects.Player;
+import org.ayato.scene.setups.PlayerGunStates;
 import org.ayato.scene.setups.PlayerStates;
 import org.ayato.system.ToonMaster;
 import org.ayato.util.BaseScene;
@@ -76,5 +77,6 @@ public class GameScene extends BaseScene {
                 new Scale(90,90),
                 new Rotate(0)
         )));
+        setups.add(new PlayerGunStates(player, new Transform(400, 120, 90, 60)));
     }
 }

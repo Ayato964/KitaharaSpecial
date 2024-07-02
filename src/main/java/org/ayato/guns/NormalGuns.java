@@ -11,7 +11,7 @@ import org.ayato.util.BaseScene;
 public class NormalGuns extends Gun{
 
     public NormalGuns() {
-        super( 100, 1, 40, 20);
+        super( 100, 1, 40, 20, "NormalGun");
     }
     @Override
     public void pushTrigger(BaseShooter parent, BaseScene scene, int multiBurstNum) {

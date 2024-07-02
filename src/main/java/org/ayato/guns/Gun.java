@@ -5,16 +5,18 @@ import org.ayato.objects.BaseShooter;
 import org.ayato.util.BaseScene;
 
 public abstract class Gun {
-    private final int rate, multiBurstNum, maxBulletNum, keepValueTime;
-    private int rate_num = 0;
-    private int blast = 0;
-    private int wait = 0;
-    private int keepTime = 0;
-    protected Gun(int rate, int multiBurstNum, int maxBulletNum, int keepValueTime) {
+    public final int rate, multiBurstNum, maxBulletNum, keepValueTime;
+    public final String name;
+    public int rate_num = 0;
+    public int blast = 0;
+    public int wait = 0;
+    public int keepTime = 0;
+    protected Gun(int rate, int multiBurstNum, int maxBulletNum, int keepValueTime, String name) {
         this.rate = rate;
         this.multiBurstNum = multiBurstNum;
         this.maxBulletNum = maxBulletNum;
         this.keepValueTime = keepValueTime;
+        this.name = name;
     }
     public final void pushTrigger(BaseShooter parent, BaseScene scene){
         wait = 0;
@@ -29,7 +31,7 @@ public abstract class Gun {
 
     public void unTrigger(){
         wait ++;
-        if(wait >= 2000){
+        if(wait >= 1000){
             keepTime ++;
             if(keepTime >= keepValueTime){
                 keepTime = 0;
