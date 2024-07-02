@@ -11,9 +11,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class BaseBullet extends ToonObject {
     private final ToonObject parent;
-    protected BaseBullet(Transform transform, BaseShooter parent) {
+    private final int atk;
+    protected BaseBullet(Transform transform, BaseShooter parent, int atk) {
         super(transform);
         this.parent = parent;
+        this.atk = atk;
     }
     @Override
     protected void tick(Transform transform) {
@@ -26,7 +28,8 @@ public abstract class BaseBullet extends ToonObject {
         CopyOnWriteArrayList<ToonObject> objects =  ToonMaster.getINSTANCE().MY_SCENE.getObjects();
         for(ToonObject o : objects)
             if(o.transform.isCollision(transform) && o.getSerialID() != getSerialID() && o.getSerialID() != parent.getSerialID()) {
-                ToonMaster.getINSTANCE().MY_SCENE.deleteObject(o);
+                if(o instanceof BaseShooter base)
+                    base.damaged(atk);
                 ToonMaster.getINSTANCE().MY_SCENE.deleteObject(this);
             }
     }

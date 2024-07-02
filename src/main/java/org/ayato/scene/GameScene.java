@@ -54,7 +54,8 @@ public class GameScene extends BaseScene {
             wait_time_max = wait_sup.get();
             addObject(new Enemy(
                     new Transform(new Random().nextInt(0, 300), 0, 40, 40),
-                    ToonMaster.getINSTANCE().MY_SCENE
+                    ToonMaster.getINSTANCE().MY_SCENE,
+                    rand.nextInt(player.level) + 2
             ));
         }
     }

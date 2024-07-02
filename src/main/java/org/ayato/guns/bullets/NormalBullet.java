@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class NormalBullet extends BaseBullet{
     public NormalBullet(Transform transform, BaseShooter parent) {
-        super(transform, parent);
+        super(transform, parent, 1);
     }
 
     @Override

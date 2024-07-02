@@ -15,7 +15,7 @@ public final class Player extends BaseShooter {
     private final ImageMaker image = new ImageMaker("objects", "player");
 
     public Player(Transform transform, String name, BaseScene scene) {
-        super(transform, scene);
+        super(transform, scene, 20);
         this.name = name;
         guns.add(new NormalGuns());
 
