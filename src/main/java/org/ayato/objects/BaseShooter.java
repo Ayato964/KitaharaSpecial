@@ -11,8 +11,8 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public abstract sealed class BaseShooter extends ToonObject permits Enemy, Player {
-    protected final ArrayList<Gun> guns = new ArrayList<>();
-    private int haveGunNumber = 0;
+    public final ArrayList<Gun> guns = new ArrayList<>();
+    public int haveGunNumber = 0;
     private final BaseScene scene;
     private Transform pos;
     protected BaseShooter(Transform transform, BaseScene scene) {

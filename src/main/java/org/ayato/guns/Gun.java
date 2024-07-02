@@ -29,7 +29,7 @@ public abstract class Gun {
 
     public void unTrigger(){
         wait ++;
-        if(wait >= 300){
+        if(wait >= 2000){
             keepTime ++;
             if(keepTime >= keepValueTime){
                 keepTime = 0;

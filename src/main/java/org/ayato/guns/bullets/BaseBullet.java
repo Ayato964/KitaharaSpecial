@@ -6,6 +6,9 @@ import org.ayato.component.Vector2D;
 import org.ayato.objects.BaseShooter;
 import org.ayato.system.ToonMaster;
 
+import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public abstract class BaseBullet extends ToonObject {
     private final ToonObject parent;
     protected BaseBullet(Transform transform, BaseShooter parent) {
@@ -20,7 +23,12 @@ public abstract class BaseBullet extends ToonObject {
     }
 
     private void collision(Transform transform) {
-
+        CopyOnWriteArrayList<ToonObject> objects =  ToonMaster.getINSTANCE().MY_SCENE.getObjects();
+        for(ToonObject o : objects)
+            if(o.transform.isCollision(transform) && o.getSerialID() != getSerialID() && o.getSerialID() != parent.getSerialID()) {
+                ToonMaster.getINSTANCE().MY_SCENE.deleteObject(o);
+                ToonMaster.getINSTANCE().MY_SCENE.deleteObject(this);
+            }
     }
 
     protected void deleteConfig(Transform transform){

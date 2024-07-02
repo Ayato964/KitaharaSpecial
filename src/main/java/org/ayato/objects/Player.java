@@ -10,8 +10,10 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public final class Player extends BaseShooter {
-    private final String name;
+    public final String name;
+    public int level = 1;
     private final ImageMaker image = new ImageMaker("objects", "player");
+
     public Player(Transform transform, String name, BaseScene scene) {
         super(transform, scene);
         this.name = name;

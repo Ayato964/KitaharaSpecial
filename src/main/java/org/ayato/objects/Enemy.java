@@ -12,7 +12,7 @@ public non-sealed class Enemy extends BaseShooter{
 
     @Override
     protected void move(Transform transform) {
-        transform.position.setY(transform.position.getNormalY() + 0.2f);
+        transform.position.setY(transform.position.getNormalY() + 0.1f);
     }
 
     @Override

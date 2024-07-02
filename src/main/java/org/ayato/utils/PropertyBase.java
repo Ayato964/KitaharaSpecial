@@ -13,8 +13,7 @@ public class PropertyBase {
     public static final PropertiesSupplier<TextProperties> TEMPLATE = (x, y) ->
          PropertiesComponent.ofText(x, y)
                 .font("", Font.PLAIN, 1.5f)
-                .color(Color.WHITE)
-                 .center();
+                .color(Color.WHITE);
     public static final Supplier<AnimationState> STATE = ()-> new AnimationState(
             Color.WHITE,
             Color.BLUE,

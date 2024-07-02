@@ -18,7 +18,7 @@ public class NormalGuns extends Gun{
         ToonMaster.getINSTANCE().MY_SCENE.addObject(new NormalBullet(
                 new Transform((int) parent.getTransform().position.getNormalX(),
                         (int) parent.getTransform().position.getNormalY(),
-                        10, 10)
+                        5, 5)
                 , parent));
     }
 }
