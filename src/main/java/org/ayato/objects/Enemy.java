@@ -8,19 +8,15 @@ import org.ayato.util.BaseScene;
 
 import java.awt.*;
 
-public non-sealed class Enemy extends BaseShooter{
+public abstract non-sealed class Enemy extends BaseShooter{
     int bodyATK = 1;
     int bodyWaitingTimeMax = 200;
     int bodyWaitingTime = bodyWaitingTimeMax;
     int haveEXP;
+
     public Enemy(Transform transform, BaseScene scene, int hp) {
         super(transform, scene, hp);
         haveEXP = hp / 2;
-    }
-
-    @Override
-    protected void move(Transform transform) {
-        transform.position.setY(transform.position.getNormalY() + 0.1f);
     }
 
     @Override
@@ -53,4 +49,7 @@ public non-sealed class Enemy extends BaseShooter{
         graphics2D.setFont(new Font("", Font.PLAIN, 128));
         graphics2D.drawString(String.valueOf(hp), i, (i1));
     }
+
+    @Override
+    protected abstract void move(Transform transform);
 }

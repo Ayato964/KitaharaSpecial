@@ -1,11 +1,12 @@
 package org.ayato.scene;
 
 import org.ayato.component.*;
-import org.ayato.objects.Enemy;
 import org.ayato.objects.Player;
 import org.ayato.scene.setups.PlayerGunStates;
 import org.ayato.scene.setups.PlayerStates;
 import org.ayato.system.ToonMaster;
+import org.ayato.system.Wave;
+import org.ayato.system.WaveRegistries;
 import org.ayato.util.BaseScene;
 import org.ayato.util.Setup;
 
@@ -19,6 +20,8 @@ public class GameScene extends BaseScene {
     private final Random rand = new Random();
     public final Player player;
     public Supplier<Integer> wait_sup;
+    public ArrayList<Wave> wavePattern = new ArrayList<>();
+
     public int wait_time = 0, wait_time_max;
     public GameScene(String name){
         player = new Player(new Transform(
@@ -28,6 +31,8 @@ public class GameScene extends BaseScene {
         ), name, this);
         wait_sup = ()-> Math.max(rand.nextInt(Math.max(3000- player.level * 10, 1)), 100);
         wait_time_max = wait_sup.get();
+        wavePattern.add(WaveRegistries.NORMAL_MULTI.getInit());
+        wavePattern.add(WaveRegistries.NORMAL_SINGLE.getInit());
     }
 
     @Override
@@ -53,11 +58,8 @@ public class GameScene extends BaseScene {
         if(wait_time >= wait_time_max){
             wait_time = 0;
             wait_time_max = wait_sup.get();
-            addObject(new Enemy(
-                    new Transform(new Random().nextInt(0, 300), 0, 40, 40),
-                    ToonMaster.getINSTANCE().MY_SCENE,
-                    rand.nextInt(player.level) + 2
-            ));
+            if(!wavePattern.isEmpty())
+                wavePattern.get(rand.nextInt(wavePattern.size())).action(this, player);
         }
     }
 
